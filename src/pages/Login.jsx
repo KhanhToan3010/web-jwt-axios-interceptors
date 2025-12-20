@@ -9,17 +9,28 @@ import { useForm } from 'react-hook-form'
 import Typography from '@mui/material/Typography'
 import TrungQuanDevIcon from '../assets/logo-toantech.png'
 import authorizedAxiosInstance from '~/utils/authorizedAxios'
-import { toast } from 'react-toastify'
 import { API_ROOT } from '~/utils/constants'
+import { useNavigate } from 'react-router-dom'
 
 function Login() {
   const { register, handleSubmit, formState: { errors } } = useForm()
+  const navigate = useNavigate() // xu li dieu huong sang trang dashboard
 
   const submitLogIn = async (data) => {
     console.log('submit login: ', data)
     const res = await authorizedAxiosInstance.post(`${API_ROOT}/v1/users/login`, data)
     //console.log(res.data)
-    toast.success(res.data?.message)
+    const userInfo = {
+      id: res.data.id,
+      email: res.data.email
+    }
+
+    localStorage.setItem('accessToken', res.data.accessToken)
+    localStorage.setItem('refreshToken', res.data.refreshToken)
+    localStorage.setItem('userInfo', JSON.stringify(userInfo))
+
+    // Direact to Dashboard when login success
+    navigate('/dashboard')
   }
 
   return (
