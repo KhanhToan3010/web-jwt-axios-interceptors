@@ -9,6 +9,7 @@ import auhtorizedAxiosInstance from '~/utils/authorizedAxios'
 import { API_ROOT } from '~/utils/constants'
 import authorizedAxiosInstance from '~/utils/authorizedAxios'
 import { useNavigate } from 'react-router-dom'
+import { handleLogoutApi } from '~/apis'
 
 function Dashboard() {
   const [user, setUser] = useState(null)
@@ -26,15 +27,10 @@ function Dashboard() {
   }, [])
 
   const handleLogout = async () => {
-    // TH1: Dung localstorage -> chi can xoa thong tin user trong localStorage phia FE
-    localStorage.removeItem('accessToken')
-    localStorage.removeItem('refreshToken')
-    localStorage.removeItem('userInfo')
-
-    // TH2: Dung HttpOnly Cookies -> goi API de xoa token (remove cookie) phia BE
-    await authorizedAxiosInstance.delete(`${API_ROOT}/v1/users/logout`)
+    await handleLogoutApi()
     setUser(null)
-
+    // Nếu TH2: Dung HttpOnly Cookies -> xoá userInfo trong localStorage
+    // localStorage.removeItem('userInfo')
     // Direct to Login page after logout
     navigate('/login')
   }
