@@ -7,7 +7,6 @@ import CircularProgress from '@mui/material/CircularProgress'
 import Divider from '@mui/material/Divider'
 import auhtorizedAxiosInstance from '~/utils/authorizedAxios'
 import { API_ROOT } from '~/utils/constants'
-import authorizedAxiosInstance from '~/utils/authorizedAxios'
 import { useNavigate } from 'react-router-dom'
 import { handleLogoutApi } from '~/apis'
 
@@ -25,6 +24,37 @@ function Dashboard() {
     }
     fetchData()
   }, [])
+// Mớ useEffect này dùng để test
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     const res = await auhtorizedAxiosInstance.get(`${API_ROOT}/v1/dashboards/access`)
+  //     //console.log('Data from API: ', res.data)
+  //     //const userInforFromLocalStorage = localStorage.getItem('userInfo')
+  //     //console.log('Data from LocalStorage: ', JSON.parse(userInforFromLocalStorage))
+  //     setUser(res.data)
+  //   }
+  //   fetchData()
+  // }, [])
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     const res = await auhtorizedAxiosInstance.get(`${API_ROOT}/v1/dashboards/access`)
+  //     //console.log('Data from API: ', res.data)
+  //     //const userInforFromLocalStorage = localStorage.getItem('userInfo')
+  //     //console.log('Data from LocalStorage: ', JSON.parse(userInforFromLocalStorage))
+  //     setUser(res.data)
+  //   }
+  //   fetchData()
+  // }, [])
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     const res = await auhtorizedAxiosInstance.get(`${API_ROOT}/v1/dashboards/access`)
+  //     //console.log('Data from API: ', res.data)
+  //     //const userInforFromLocalStorage = localStorage.getItem('userInfo')
+  //     //console.log('Data from LocalStorage: ', JSON.parse(userInforFromLocalStorage))
+  //     setUser(res.data)
+  //   }
+  //   fetchData()
+  // }, [])
 
   const handleLogout = async () => {
     await handleLogoutApi()
